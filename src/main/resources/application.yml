@@ -29,4 +29,4 @@ integration:
   cliente:
     service: ${CLIENTE_SERVICE:localhost:8090/lanchonete/api/v1}
   produto:
-    service: ${CLIENTE_SERVICE:localhost:8090/lanchonete/api/v1}
+    service: ${PRODUTO_SERVICE:localhost:8090/lanchonete/api/v1}

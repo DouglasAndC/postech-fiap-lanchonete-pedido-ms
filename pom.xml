@@ -8,8 +8,8 @@
         <version>3.1.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>br.com.fiap</groupId>
-    <artifactId>pedido</artifactId>
+    <groupId>br.com.fiap.lanchonete</groupId>
+    <artifactId>lanchonete-pedido</artifactId>
     <version>1.0.0</version>
     <name>lanchonete-pedido-ms</name>
     <description>pedido ms</description>

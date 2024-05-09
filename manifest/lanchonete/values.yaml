@@ -108,7 +108,8 @@ healthCheck:
 
 env:
   - name: DATABASE_URL
-
     value: "jdbc:postgresql://lanchonete-db.cvwsi6meo8q2.us-east-1.rds.amazonaws.com:5432/lanchonete"
-  - name: JAVA_TOOL_OPTIONS
-    value: "-Dserver.http2.enabled=true"
+  - name: CLIENTE_SERVICE
+    value: ""
+  - name: PRODUTO_SERVICE
+    value: ""
