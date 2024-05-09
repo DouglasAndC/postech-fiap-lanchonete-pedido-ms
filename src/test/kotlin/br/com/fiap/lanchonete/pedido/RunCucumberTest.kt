@@ -8,7 +8,7 @@ import org.junit.platform.suite.api.Suite
 @Suite
 @IncludeEngines("cucumber")
 @ConfigurationParameter(key = Constants.FEATURES_PROPERTY_NAME, value = "src/test/resources/features/pedido.feature")
-@ConfigurationParameter(key = Constants.GLUE_PROPERTY_NAME,value = "br.com.fiap.lanchonete.pedido.steps")
+@ConfigurationParameter(key = Constants.GLUE_PROPERTY_NAME,value = "br.com.fiap.lanchonete.pedido.integration")
 @ConfigurationParameter(key = Constants.PLUGIN_PROPERTY_NAME,value = "pretty, html:target/cucumber-report/cucumber.html")
 class RunCucumberTest  {
 }

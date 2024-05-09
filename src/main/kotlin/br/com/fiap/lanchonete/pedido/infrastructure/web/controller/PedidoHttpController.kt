@@ -64,6 +64,5 @@ class PedidoHttpController(private val pedidoApplicationController: PedidoApplic
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }
 
-
 }
 

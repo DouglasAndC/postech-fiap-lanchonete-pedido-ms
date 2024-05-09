@@ -1,42 +1,51 @@
-Feature: PedidoHttpController
-  Como usuário da API
-  Quero criar, recuperar, atualizar e excluir pedidos
+Feature: Gerenciar Pedidos
+
+Feature: Gerenciar Pedidos
 
   Scenario: Criar um novo pedido
-    Given eu faço um POST para a rota "/pedidos" com os dados de um pedido válido
-    When a resposta do status HTTP deve ser 201
-    Then a resposta deve conter um campo "id"
+    Given tenho um pedido válido
+    When solicito a criação do pedido
+    Then a API deve retornar o status "201"
 
-  Scenario: Tentar criar um pedido com dados inválidos
-    Given eu faço um POST para a rota "/pedidos" com dados de pedido inválidos
-    When a resposta do status HTTP deve ser 400
-    Then a resposta deve conter uma mensagem de erro
+  Scenario Outline: Consultar status do pedido
+    Given um pedido existente com o id "<id>"
+    When eu envio uma requisição de consulta de status
+    Then a API deve retornar o status "200"
 
-  Scenario: Obter detalhes de um pedido existente
-    Given eu faço um GET para a rota "/pedidos/{id}" com um id de pedido válido
-    When a resposta do status HTTP deve ser 200
-    Then a resposta deve conter os detalhes do pedido
+    Examples:
+      | id                                     |
+      | 4a7ce830-6092-4e86-9422-1b048cdea257   |
 
-  Scenario: Tentar obter detalhes de um pedido não existente
-    Given eu faço um GET para a rota "/pedidos/{id}" com um id de pedido inválido
-    When a resposta do status HTTP deve ser 404
-    Then a resposta deve conter uma mensagem de erro
+  Scenario: Listar todos os pedidos (paginado)
+    Given existam alguns pedidos cadastrados
+    When eu envio uma requisição para listar os pedidos
+    Then a API deve retornar o status "200"
 
-  Scenario: Atualizar um pedido existente
-    Given eu faço um PUT para a rota "/pedidos/{id}" com um id de pedido válido e dados de pedido atualizados
-    When a resposta do status HTTP deve ser 200
-    Then a resposta deve conter os detalhes do pedido atualizado
+  Scenario Outline: Atualizar o status de um pedido
+    Given um pedido existente com o id "<id>"
+    When atualizo o status do pedido "<id>" "<status>"
+    Then  a API deve retornar o status "200"
+    And o status do pedido deve ser "<status>"
 
-  Scenario: Tentar atualizar um pedido não existente
-    Given eu faço um PUT para a rota "/pedidos/{id}" com um id de pedido inválido
-    When a resposta do status HTTP deve ser 404
-    Then a resposta deve conter uma mensagem de erro
-
-  Scenario: Excluir um pedido existente
-    Given eu faço um DELETE para a rota "/pedidos/{id}" com um id de pedido válido
-    Then a resposta do status HTTP deve ser 204
-
-  Scenario: Tentar excluir um pedido não existente
-    Given eu faço um DELETE para a rota "/pedidos/{id}" com um id de pedido inválido
-    When a resposta do status HTTP deve ser 404
-    Then a resposta deve conter uma mensagem de erro
+    Examples:
+      | id                                     | status  |
+      | 3fa85f64-5717-4562-b3fc-2c963f66afa6   | PRONTO  |
+#
+#  Scenario Outline: Realizar checkout de um pedido
+#    Given um pedido existente com o id "{id}"
+#    When eu envio uma requisição PATCH para "/pedidos/{id}"
+#    Then  a API deve retornar o status "200"
+#    And o status do pedido deve ser "PAGO"
+#
+#    Examples:
+#      | id      |
+#      | 12345   |
+#
+#  Scenario Outline: Processar webhook do Mercado Pago
+#    Given um pedido existente com o id "{id}"
+#    When eu envio uma requisição POST para "/pedidos/webhook" com o payload do webhook
+#    Then a API deve atualizar o status do pagamento do pedido
+#
+#    Examples:
+#      | id      |
+#      | 54321   |

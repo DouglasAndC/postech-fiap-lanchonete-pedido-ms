@@ -1,16 +1,18 @@
 spring:
-  data:
-    mongodb:
-      authentication-database: admin
-      database: lanchonete
-      username: user
-      password: password
-      host: localhost
-      port: 27017
+#  data:
+#    mongodb:
+#      authentication-database: admin
+#      database: lanchonete
+#      username: user
+#      password: password
+#      host: localhost
+#      port: 27017
   jackson:
     deserialization:
       fail-on-unknown-properties: false
 server:
+  host: localhost
+  port: 8080
   servlet:
     context-path: /lanchonete-pedidos/api/v1
 
@@ -27,6 +29,12 @@ integration:
     collector-id: ??????????
     pos-id: SUC001POSSUC001001
   cliente:
-    service: ${CLIENTE_SERVICE:localhost:8090/lanchonete/api/v1}
+    service: ${CLIENTE_SERVICE:localhost:8090/lanchonete-cliente/api/v1}
   produto:
-    service: ${CLIENTE_SERVICE:localhost:8090/lanchonete/api/v1}
+    service: ${CLIENTE_SERVICE:localhost:8090/lanchonete-produto/api/v1}
+
+de:
+  flapdoodle:
+    mongodb:
+      embedded:
+        version: 6.0.5
