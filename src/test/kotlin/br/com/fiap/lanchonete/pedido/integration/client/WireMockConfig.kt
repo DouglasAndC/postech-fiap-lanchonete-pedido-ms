@@ -6,9 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.aResponse
 import com.github.tomakehurst.wiremock.client.WireMock.get
-import com.github.tomakehurst.wiremock.client.WireMock.post
+import com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo
 import com.github.tomakehurst.wiremock.client.WireMock.urlPathMatching
-import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.MediaType
@@ -19,12 +18,11 @@ class WireMockConfig {
     @Bean(initMethod = "start", destroyMethod = "stop")
     fun wireMocServer() = WireMockServer(8090)
 
-
     companion object {
         fun setupCliente(wireMockServer: WireMockServer){
             val objectMapper = ObjectMapper()
             wireMockServer.stubFor(
-                get(urlPathMatching("/lanchonete-cliente/api/v1/clientes/[^/]*"))
+                get(urlEqualTo("/lanchonete-cliente/api/v1/clientes/123.456.789-00"))
                     .willReturn(
                         aResponse().withHeader(
                             "Content-Type",
@@ -36,7 +34,7 @@ class WireMockConfig {
                     )
             )
             wireMockServer.stubFor(
-                get(urlPathMatching("/lanchonete-produto/api/v1/produto/[^/]*"))
+                get(urlEqualTo("/lanchonete-produto/api/v1/produto/1"))
                     .willReturn(
                         aResponse().withHeader(
                             "Content-Type",
