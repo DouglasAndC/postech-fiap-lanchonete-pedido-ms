@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.fiap.lanchonete.pedido</groupId>
-    <artifactId>lanchonete-pedido</artifactId>
+    <artifactId>lanchonete-pedido-ms</artifactId>
     <version>1.0.0</version>
     <name>lanchonete-pedido-ms</name>
     <description>pedido ms</description>
