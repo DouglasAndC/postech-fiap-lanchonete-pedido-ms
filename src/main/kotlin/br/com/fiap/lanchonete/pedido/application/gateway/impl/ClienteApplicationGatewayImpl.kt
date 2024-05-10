@@ -6,7 +6,6 @@ import br.com.fiap.lanchonete.pedido.infrastructure.web.client.ClienteClient
 import br.com.fiap.lanchonete.pedido.infrastructure.web.client.dto.produto.ClienteDto
 import br.com.fiap.lanchonete.pedido.infrastructure.web.exception.ClienteClientExceptionEnum
 import feign.FeignException
-import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 
 @Service

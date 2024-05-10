@@ -5,7 +5,6 @@ import br.com.fiap.lanchonete.pedido.infrastructure.web.client.ClienteClient
 import br.com.fiap.lanchonete.pedido.infrastructure.web.client.dto.produto.ClienteDto
 import br.com.fiap.lanchonete.pedido.infrastructure.web.exception.ClienteClientExceptionEnum
 import feign.FeignException
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

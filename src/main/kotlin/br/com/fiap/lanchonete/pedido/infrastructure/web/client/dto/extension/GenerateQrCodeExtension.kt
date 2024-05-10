@@ -1,7 +1,7 @@
 package br.com.fiap.lanchonete.pedido.infrastructure.web.client.dto.extension
 
-import br.com.fiap.lanchonete.pedido.domain.entities.Pedido
 import br.com.fiap.lanchonete.pedido.domain.entities.Combo
+import br.com.fiap.lanchonete.pedido.domain.entities.Pedido
 import br.com.fiap.lanchonete.pedido.infrastructure.web.client.dto.mercado_pago.GenerateQrCodeRequest
 import br.com.fiap.lanchonete.pedido.infrastructure.web.client.dto.mercado_pago.Item
 

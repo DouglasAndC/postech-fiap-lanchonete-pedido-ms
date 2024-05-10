@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody
 
 @Service
 @FeignClient(name = "produtoClient", url = "\${integration.produto.service}")
-interface ProdutoClient {
+fun interface ProdutoClient {
     @GetMapping("/produto/{id}")
     @ResponseBody
     fun get(@PathVariable id: Long): ProdutoDto

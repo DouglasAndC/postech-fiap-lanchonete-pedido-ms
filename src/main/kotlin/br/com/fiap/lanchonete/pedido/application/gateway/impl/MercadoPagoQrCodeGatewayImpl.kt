@@ -6,7 +6,6 @@ import br.com.fiap.lanchonete.pedido.domain.entities.Pedido
 import br.com.fiap.lanchonete.pedido.infrastructure.web.client.MercadoPagoClient
 import br.com.fiap.lanchonete.pedido.infrastructure.web.client.dto.extension.toGenerateQrCodeRequest
 import br.com.fiap.lanchonete.pedido.infrastructure.web.client.dto.mercado_pago.GetOrderResponse
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 
 @Service

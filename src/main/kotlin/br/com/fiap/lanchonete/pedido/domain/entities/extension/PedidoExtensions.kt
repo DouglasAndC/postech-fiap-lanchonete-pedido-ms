@@ -1,10 +1,10 @@
 package br.com.fiap.lanchonete.pedido.domain.entities.extension
 
-import br.com.fiap.lanchonete.pedido.domain.entities.Pedido
 import br.com.fiap.lanchonete.pedido.application.dto.response.ComboResponse
 import br.com.fiap.lanchonete.pedido.application.dto.response.PedidoPagamentoStatusResponse
 import br.com.fiap.lanchonete.pedido.application.dto.response.PedidoResponse
 import br.com.fiap.lanchonete.pedido.domain.entities.Combo
+import br.com.fiap.lanchonete.pedido.domain.entities.Pedido
 
 
 fun Pedido.toStatusDTO() = PedidoPagamentoStatusResponse(
