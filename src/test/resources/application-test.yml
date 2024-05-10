@@ -1,0 +1,32 @@
+spring:
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: false
+server:
+  host: localhost
+  port: 8080
+  servlet:
+    context-path: /lanchonete-pedidos/api/v1
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: TRACE
+
+integration:
+  mercado-pago:
+    service: ${MERCADO_PAGO_SERVICE:https://api.mercadopago.com}
+    enabled: ${MERCADO_PAGO_ENABLED:false}
+    bearer-token: TEST-??????????-??????????-??????????
+    collector-id: ??????????
+    pos-id: SUC001POSSUC001001
+  cliente:
+    service: ${CLIENTE_SERVICE:localhost:8090/lanchonete-cliente/api/v1}
+  produto:
+    service: ${CLIENTE_SERVICE:localhost:8090/lanchonete-produto/api/v1}
+
+de:
+  flapdoodle:
+    mongodb:
+      embedded:
+        version: 6.0.5
