@@ -3,9 +3,9 @@ spring:
     mongodb:
       authentication-database: admin
       database: lanchonete
-      username: user
+      username: username
       password: password
-      host: localhost
+      host: ${DATABASE_HOST:localhost}
       port: 27017
   jackson:
     deserialization:
@@ -27,6 +27,6 @@ integration:
     collector-id: ??????????
     pos-id: SUC001POSSUC001001
   cliente:
-    service: ${CLIENTE_SERVICE:localhost:8090/lanchonete/api/v1}
+    service: ${CLIENTE_SERVICE:localhost:8090/lanchonete-cliente/api/v1}
   produto:
-    service: ${PRODUTO_SERVICE:localhost:8090/lanchonete/api/v1}
+    service: ${PRODUTO_SERVICE:localhost:8090/lanchonete-produto/api/v1}

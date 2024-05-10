@@ -70,11 +70,13 @@ jobs:
       env: 
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
-         QUALITY_GATE_STATUS=$(curl -s "https://sonarcloud.io/api/qualitygates/project_status?projectKey=lanchonete-fiap_lanchonete-pedido" -H "Authorization: Basic $SONAR_TOKEN" | jq -r '.projectStatus.status')
-         if [ "$QUALITY_GATE_STATUS" != "OK" ]; then
-            echo "Fail on Quality Gate"
-            exit 1
-         fi
+        QUALITY_GATE_STATUS=$(curl -L -u $SONAR_TOKEN: "https://sonarcloud.io/api/qualitygates/project_status?projectKey=lanchonete-fiap_lanchonete-pedido&branch=${GITHUB_REF#refs/heads/}" | jq -r '.projectStatus.status')
+        echo "${GITHUB_REF#refs/heads/}"
+        echo "$QUALITY_GATE_STATUS"
+        if [ "$QUALITY_GATE_STATUS" != "OK" ]; then
+          echo "Fail on Quality Gate"
+        exit 1
+        fi
 
   push-to-registry:
     runs-on: ubuntu-latest

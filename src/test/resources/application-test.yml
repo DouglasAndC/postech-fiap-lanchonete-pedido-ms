@@ -1,12 +1,4 @@
 spring:
-#  data:
-#    mongodb:
-#      authentication-database: admin
-#      database: lanchonete
-#      username: user
-#      password: password
-#      host: localhost
-#      port: 27017
   jackson:
     deserialization:
       fail-on-unknown-properties: false

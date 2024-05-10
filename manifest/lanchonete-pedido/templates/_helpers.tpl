@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "lanchonete.name" -}}
+{{- define "lanchonete-pedido.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "lanchonete.fullname" -}}
+{{- define "lanchonete-pedido.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "lanchonete.chart" -}}
+{{- define "lanchonete-pedido.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "lanchonete.labels" -}}
-helm.sh/chart: {{ include "lanchonete.chart" . }}
-{{ include "lanchonete.selectorLabels" . }}
+{{- define "lanchonete-pedido.labels" -}}
+helm.sh/chart: {{ include "lanchonete-pedido.chart" . }}
+{{ include "lanchonete-pedido.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "lanchonete.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "lanchonete.name" . }}
+{{- define "lanchonete-pedido.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "lanchonete-pedido.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "lanchonete.serviceAccountName" -}}
+{{- define "lanchonete-pedido.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "lanchonete.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "lanchonete-pedido.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
