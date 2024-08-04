@@ -10,7 +10,7 @@
     </parent>
     <groupId>br.com.fiap.lanchonete.pedido</groupId>
     <artifactId>lanchonete-pedido-ms</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>lanchonete-pedido-ms</name>
     <description>pedido ms</description>
     <properties>
