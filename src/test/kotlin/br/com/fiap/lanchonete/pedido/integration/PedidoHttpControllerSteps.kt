@@ -80,10 +80,6 @@ class PedidoHttpControllerSteps(@Autowired private val wireMockServer: WireMockS
     fun um_pedido_existente_com_o_id(id: String, status: StatusPedido) {
         idPedido = id
 
-
-//        `when`(pedidoToCozinhaMessageSenderGateway.sendMessageToCozinha(any())).thenReturn(Unit)
-//        `when`(pedidoToClienteMessageSenderGateway.sendMessageToCliente(any())).thenReturn(Unit)
-
         pedidoMongoRepository.save(Pedido(id, status, StatusPagamento.APROVADO))
     }
 
