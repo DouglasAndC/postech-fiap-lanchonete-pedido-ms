@@ -8,7 +8,6 @@ import br.com.fiap.lanchonete.pedido.application.gateway.ClienteApplicationGatew
 import br.com.fiap.lanchonete.pedido.application.gateway.ProdutoApplicationGateway
 import br.com.fiap.lanchonete.pedido.domain.entities.Combo
 import br.com.fiap.lanchonete.pedido.domain.entities.Pedido
-import br.com.fiap.lanchonete.pedido.domain.entities.enums.StatusPagamento
 import br.com.fiap.lanchonete.pedido.domain.entities.enums.StatusPedido
 import br.com.fiap.lanchonete.pedido.domain.entities.extension.toDTO
 import br.com.fiap.lanchonete.pedido.domain.entities.extension.toStatusDTO
