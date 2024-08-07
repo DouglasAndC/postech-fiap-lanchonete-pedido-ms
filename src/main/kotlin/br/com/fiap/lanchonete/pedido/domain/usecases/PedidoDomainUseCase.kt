@@ -1,6 +1,8 @@
 package br.com.fiap.lanchonete.pedido.domain.usecases
 
 import br.com.fiap.lanchonete.pedido.application.gateway.PedidoRepositoryGateway
+import br.com.fiap.lanchonete.pedido.application.gateway.PedidoToClienteMessageSenderGateway
+import br.com.fiap.lanchonete.pedido.application.gateway.PedidoToCozinhaMessageSenderGateway
 import br.com.fiap.lanchonete.pedido.domain.entities.Pedido
 import br.com.fiap.lanchonete.pedido.domain.entities.enums.StatusPagamento
 import br.com.fiap.lanchonete.pedido.domain.entities.enums.StatusPedido
@@ -16,7 +18,11 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional(readOnly = true)
-class PedidoDomainUseCase(private val pedidoRepositoryGateway: PedidoRepositoryGateway) {
+class PedidoDomainUseCase(
+    private val pedidoRepositoryGateway: PedidoRepositoryGateway,
+    private val pedidoToCozinhaMessageSenderGateway: PedidoToCozinhaMessageSenderGateway,
+    private val pedidoToClienteMessageSenderGateway: PedidoToClienteMessageSenderGateway
+) {
 
 
     fun findPedidoById(id: String) =
@@ -56,6 +62,7 @@ class PedidoDomainUseCase(private val pedidoRepositoryGateway: PedidoRepositoryG
                 throw BusinessException(PedidoExceptionEnum.PEDIDO_STATUS_INVALID)
             }
         }
+
     @Transactional
     fun updatePedido(pedido: Pedido):Pedido{
         return pedidoRepositoryGateway.save(pedido)
@@ -75,9 +82,11 @@ class PedidoDomainUseCase(private val pedidoRepositoryGateway: PedidoRepositoryG
     fun closePedidoPagamento(pedido: Pedido, orderResponse: GetOrderResponse?){
         if(validatePedidoPagamento(orderResponse)){
             pedido.pagamento = StatusPagamento.APROVADO
+            pedidoToCozinhaMessageSenderGateway.sendMessageToCozinha(pedido)
         } else {
             pedido.pagamento = StatusPagamento.RECUSADO
         }
+        pedidoToClienteMessageSenderGateway.sendMessageToCliente(pedido)
         updatePedido(pedido)
     }
 

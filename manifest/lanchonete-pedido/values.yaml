@@ -83,17 +83,15 @@ autoscaling:
   targetMemoryUtilizationPercentage: 80
 
 # Additional volumes on the output Deployment definition.
-volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
+volumes:
+  - name: secret-password-broker-mq-queue-volume
+    secret:
+      secretName: secret-password-broker-mq-queue
 
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
+volumeMounts:
+  - name: secret-password-broker-mq-queue-volume
+    mountPath: /etc/credentials/secret-password-broker-mq-queue
 
 nodeSelector: {}
 
@@ -110,6 +108,24 @@ env:
   - name: DATABASE_HOST
     value: "lanchonete-pedido-db.cluster-cvwsi6meo8q2.us-east-1.docdb.amazonaws.com"
   - name: CLIENTE_SERVICE
-    value: "http://demo.io/lanchonete-cliente/api/v1"
+    value: "http://lanchonete-cliente:8080/lanchonete-cliente/api/v1"
   - name: PRODUTO_SERVICE
-    value: "http://demo.io/lanchonete-produto/api/v1"
+    value: "http://lanchonete-produto:8080/lanchonete-produto/api/v1"
+  - name: CLIENT_MQ_USERNAME
+    value: "guest-lanchonete"
+  - name: CLIENT_MQ_PASSWORD
+    value: "/etc/credentials/secret-password-broker-mq-queue"
+  - name: CLIENT_MQ_HOST
+    value: "b-f3cb747e-0f01-440e-b725-5639b5917326.mq.us-east-1.amazonaws.com"
+  - name: CLIENT_MQ_QUEUE_NAME
+    value: "pedido-to-client-mq"
+  - name: COZINHA_MQ_USERNAME
+    value: "guest-lanchonete"
+  - name: COZINHA_MQ_PASSWORD
+    value: "/etc/credentials/secret-password-broker-mq-queue"
+  - name: COZINHA_MQ_HOST
+    value: "b-f3cb747e-0f01-440e-b725-5639b5917326.mq.us-east-1.amazonaws.com"
+  - name: COZINHA_MQ_QUEUE_NAME
+    value: "pedido-to-cozinha-mq"
+  - name: MQ_PORT
+    value: "5671"

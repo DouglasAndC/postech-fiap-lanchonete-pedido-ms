@@ -15,6 +15,7 @@ import br.com.fiap.lanchonete.pedido.domain.entities.extension.toStatusDTO
 import br.com.fiap.lanchonete.pedido.domain.usecases.PedidoDomainUseCase
 import br.com.fiap.lanchonete.pedido.domain.usecases.QrCodeDomainUseCase
 import br.com.fiap.lanchonete.pedido.infrastructure.web.client.dto.extension.toDto
+import br.com.fiap.lanchonete.pedido.infrastructure.web.client.dto.mercado_pago.GetOrderResponse
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -182,7 +183,7 @@ class PedidoApplicationControllerTest {
 
         pedidoApplicationController.webhook(orderId, webhookPedidoRequest)
 
-        verify(pedidoDomainUseCase).closePedidoPagamento(eq(pedido), eq(null))
+        verify(pedidoDomainUseCase).closePedidoPagamento(eq(pedido), eq(GetOrderResponse(status = "closed", externalReference = null,orderStatus = "paid")))
     }
 
     private fun criarWebhookPedidoRequest(): WebhookPedidoRequest {

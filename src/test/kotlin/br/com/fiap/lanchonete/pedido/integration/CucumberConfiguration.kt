@@ -1,6 +1,7 @@
 package br.com.fiap.lanchonete.pedido.integration
 
 import br.com.fiap.lanchonete.pedido.PedidoApplication
+import br.com.fiap.lanchonete.pedido.integration.client.TestMockBeansConfiguration
 import io.cucumber.spring.CucumberContextConfiguration
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.annotation.Import
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit.jupiter.SpringExtension
@@ -22,6 +24,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @CucumberContextConfiguration
 @ExtendWith(SpringExtension::class)
 @ActiveProfiles("test")
+@Import(TestMockBeansConfiguration::class)
 class CucumberConfiguration {
 
     @Test
