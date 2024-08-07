@@ -4,9 +4,7 @@ import br.com.fiap.lanchonete.pedido.infrastructure.web.client.dto.produto.Clien
 import br.com.fiap.lanchonete.pedido.infrastructure.web.client.dto.produto.ProdutoDto
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.tomakehurst.wiremock.WireMockServer
-import com.github.tomakehurst.wiremock.client.WireMock.aResponse
-import com.github.tomakehurst.wiremock.client.WireMock.get
-import com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo
+import com.github.tomakehurst.wiremock.client.WireMock.*
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.MediaType
