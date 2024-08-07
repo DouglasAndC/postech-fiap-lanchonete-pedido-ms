@@ -8,14 +8,25 @@ services:
     volumes:
       - mongodatadb:/data/db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_USERNAME: username
       MONGO_INITDB_ROOT_PASSWORD: password
       MONGO_INITDB_DATABASE: lanchonete
-    networks:
-      - mybridge
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"  # Port for AMQP connections
+      - "15672:15672"  # Port for management dashboard
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+      - rabbitmq_logs:/var/log/rabbitmq
+
 volumes:
   mongodatadb:
     name: mongodata-volume
-networks:
-  mybridge:
-    driver: bridge
+  rabbitmq_data:
+  rabbitmq_logs:

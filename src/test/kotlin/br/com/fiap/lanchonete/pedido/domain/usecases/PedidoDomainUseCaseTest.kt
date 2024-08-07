@@ -1,6 +1,8 @@
 package br.com.fiap.lanchonete.pedido.domain.usecases
 
 import br.com.fiap.lanchonete.pedido.application.gateway.PedidoRepositoryGateway
+import br.com.fiap.lanchonete.pedido.application.gateway.PedidoToClienteMessageSenderGateway
+import br.com.fiap.lanchonete.pedido.application.gateway.PedidoToCozinhaMessageSenderGateway
 import br.com.fiap.lanchonete.pedido.domain.entities.Combo
 import br.com.fiap.lanchonete.pedido.domain.entities.Pedido
 import br.com.fiap.lanchonete.pedido.domain.entities.enums.StatusPagamento
@@ -30,6 +32,12 @@ class PedidoDomainUseCaseTest {
 
     @Mock
     lateinit var pedidoRepositoryGateway: PedidoRepositoryGateway
+
+    @Mock
+    lateinit var pedidoToCozinhaMessageSenderGateway: PedidoToCozinhaMessageSenderGateway
+
+    @Mock
+    lateinit var pedidoToClienteMessageSenderGateway: PedidoToClienteMessageSenderGateway
 
     private val pedido =
         Pedido(UUID.randomUUID().toString(), StatusPedido.RECEBIDO , StatusPagamento.AGUARDANDO_APROVACAO, "123.456.789-09", emptyList<Combo>().toMutableList())

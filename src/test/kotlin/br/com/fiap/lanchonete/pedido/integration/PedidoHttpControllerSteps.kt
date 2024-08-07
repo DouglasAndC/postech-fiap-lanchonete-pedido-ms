@@ -4,6 +4,8 @@ import br.com.fiap.lanchonete.pedido.application.dto.request.ComboRequest
 import br.com.fiap.lanchonete.pedido.application.dto.request.Data
 import br.com.fiap.lanchonete.pedido.application.dto.request.PedidoRequest
 import br.com.fiap.lanchonete.pedido.application.dto.request.WebhookPedidoRequest
+import br.com.fiap.lanchonete.pedido.application.gateway.PedidoToClienteMessageSenderGateway
+import br.com.fiap.lanchonete.pedido.application.gateway.PedidoToCozinhaMessageSenderGateway
 import br.com.fiap.lanchonete.pedido.domain.entities.Pedido
 import br.com.fiap.lanchonete.pedido.domain.entities.enums.StatusPagamento
 import br.com.fiap.lanchonete.pedido.domain.entities.enums.StatusPedido
@@ -12,12 +14,17 @@ import br.com.fiap.lanchonete.pedido.integration.client.PedidoCucumberClient
 import br.com.fiap.lanchonete.pedido.integration.client.WireMockConfig.Companion.setupCliente
 import com.github.tomakehurst.wiremock.WireMockServer
 import feign.FeignException
+import io.cucumber.java.Before
 import io.cucumber.java.en.And
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.mockito.Mockito.`when`
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doNothing
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -25,11 +32,18 @@ import java.util.*
 
 class PedidoHttpControllerSteps(@Autowired private val wireMockServer: WireMockServer,
                                 @Autowired private val pedidoCucumberClient: PedidoCucumberClient,
-                                @Autowired private val pedidoMongoRepository: PedidoMongoRepository) {
+                                @Autowired private val pedidoMongoRepository: PedidoMongoRepository,) {
 
     private lateinit var idPedido: String
     private lateinit var pedidoRequest: PedidoRequest
     private lateinit var response: ResponseEntity<Any>
+
+
+    @Autowired
+    private lateinit var pedidoToCozinhaMessageSenderGateway: PedidoToCozinhaMessageSenderGateway
+
+    @Autowired
+    private lateinit var pedidoToClienteMessageSenderGateway: PedidoToClienteMessageSenderGateway
 
     companion object {
         const val CUSTOMER_CPF : String = "123.456.789-00"
@@ -65,6 +79,7 @@ class PedidoHttpControllerSteps(@Autowired private val wireMockServer: WireMockS
     @Given("^um pedido existente com o id \"([^\"]*)\" status \"([^\"]*)\"$")
     fun um_pedido_existente_com_o_id(id: String, status: StatusPedido) {
         idPedido = id
+
         pedidoMongoRepository.save(Pedido(id, status, StatusPagamento.APROVADO))
     }
 

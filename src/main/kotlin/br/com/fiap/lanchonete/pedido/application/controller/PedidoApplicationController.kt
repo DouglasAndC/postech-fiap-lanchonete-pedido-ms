@@ -8,12 +8,14 @@ import br.com.fiap.lanchonete.pedido.application.gateway.ClienteApplicationGatew
 import br.com.fiap.lanchonete.pedido.application.gateway.ProdutoApplicationGateway
 import br.com.fiap.lanchonete.pedido.domain.entities.Combo
 import br.com.fiap.lanchonete.pedido.domain.entities.Pedido
+import br.com.fiap.lanchonete.pedido.domain.entities.enums.StatusPagamento
 import br.com.fiap.lanchonete.pedido.domain.entities.enums.StatusPedido
 import br.com.fiap.lanchonete.pedido.domain.entities.extension.toDTO
 import br.com.fiap.lanchonete.pedido.domain.entities.extension.toStatusDTO
 import br.com.fiap.lanchonete.pedido.domain.usecases.PedidoDomainUseCase
 import br.com.fiap.lanchonete.pedido.domain.usecases.QrCodeDomainUseCase
 import br.com.fiap.lanchonete.pedido.infrastructure.web.client.dto.extension.toModel
+import br.com.fiap.lanchonete.pedido.infrastructure.web.client.dto.mercado_pago.GetOrderResponse
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
@@ -25,7 +27,8 @@ import java.util.*
 class PedidoApplicationController(private val pedidoDomainUseCase: PedidoDomainUseCase,
                                   private val produtoApplicationGateway: ProdutoApplicationGateway,
                                   private val clienteApplicationGateway: ClienteApplicationGateway,
-                                  private val qrCodeDomainUseCase: QrCodeDomainUseCase) {
+                                  private val qrCodeDomainUseCase: QrCodeDomainUseCase,
+                                    ) {
 
     @Value("\${integration.mercado-pago.enabled}") private val mercadoPagoEnabled: Boolean = false
 
@@ -74,7 +77,7 @@ class PedidoApplicationController(private val pedidoDomainUseCase: PedidoDomainU
                 pedidoDomainUseCase.closePedidoPagamento(pedido, it)
             }
         } else {
-            pedidoDomainUseCase.closePedidoPagamento(pedido, null)
+            pedidoDomainUseCase.closePedidoPagamento(pedido, GetOrderResponse(status = "closed", externalReference = null,orderStatus = "paid"))
         }
     }
 
