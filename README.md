@@ -48,6 +48,15 @@ docker-compose up
 
 Este comando iniciará todas as imagens Docker necessárias para a execução do projeto.
 
+## Passo 2: Cadastro de Pedido
+
+Antes de criar um pedido, é necessário cadastrar os produtos disponíveis. Utilize a seguinte API para isso:
+
+- **Método:** POST
+- **URL:** `/lanchonete-pedidos/api/v1/pedido`
+
+Esta API permite o cadastro de pedidos, para rodar essa api é necessario ter pelo menos um cliente e produtos cadastrados.
+
 ## Padrão SAGA: Coreografia
 
 O projeto utiliza o padrão SAGA de coreografia em combinação com uma fila de mensagens MQ, utilizamos esse padrão principalmente pois ele é mais adequado para projetos menores e mais autônomos o que se encaixa para esse projeto. Aqui estão os principais motivos para essa escolha:
