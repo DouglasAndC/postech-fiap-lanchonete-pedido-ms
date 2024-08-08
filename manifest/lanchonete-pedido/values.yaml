@@ -86,6 +86,7 @@ autoscaling:
 volumes:
   - name: secret-password-broker-mq-queue-volume
     secret:
+      defaultMode: 420
       secretName: secret-password-broker-mq-queue
 
 # Additional volumeMounts on the output Deployment definition.

@@ -36,11 +36,11 @@ app:
     port: ${MQ_PORT:5672}
     cliente:
       username: ${CLIENT_MQ_USERNAME:guest}
-      password: ${CLIENT_MQ_PASSWORD:src/main/resources/etc/credential/secret-password-broker-mq-queue}
+      password: ${CLIENT_MQ_PASSWORD:src/main/resources/credentials/secret-password-broker-mq-queue}
       brokerURL: ${CLIENT_MQ_HOST:localhost}
       queueName: ${CLIENT_MQ_QUEUE_NAME:pedido-to-client-mq}
     cozinha:
       username: ${COZINHA_MQ_USERNAME:guest}
-      password: ${COZINHA_MQ_PASSWORD:src/main/resources/etc/credential/secret-password-broker-mq-queue}
+      password: ${COZINHA_MQ_PASSWORD:src/main/resources/credentials/secret-password-broker-mq-queue}
       brokerURL: ${COZINHA_MQ_HOST:localhost}
       queueName: ${COZINHA_MQ_QUEUE_NAME:pedido-to-cozinha-mq}
