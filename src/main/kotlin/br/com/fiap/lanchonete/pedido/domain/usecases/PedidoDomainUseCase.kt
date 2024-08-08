@@ -53,10 +53,12 @@ class PedidoDomainUseCase(
     fun checkout(id: String) =
         findPedidoById(id).also {
             if(it.status == StatusPedido.RECEBIDO){
+                pedidoToClienteMessageSenderGateway.sendMessageToCliente(it)
                 if(it.pagamento != StatusPagamento.APROVADO){
                     throw BusinessException(PedidoExceptionEnum.PEDIDO_STATUS_PAGAMENTO_INVALID)
                 }
                 it.status = StatusPedido.EM_PREPARACAO
+                pedidoToCozinhaMessageSenderGateway.sendMessageToCozinha(it)
                 pedidoRepositoryGateway.save(it)
             }else{
                 throw BusinessException(PedidoExceptionEnum.PEDIDO_STATUS_INVALID)
@@ -82,11 +84,9 @@ class PedidoDomainUseCase(
     fun closePedidoPagamento(pedido: Pedido, orderResponse: GetOrderResponse?){
         if(validatePedidoPagamento(orderResponse)){
             pedido.pagamento = StatusPagamento.APROVADO
-            pedidoToCozinhaMessageSenderGateway.sendMessageToCozinha(pedido)
         } else {
             pedido.pagamento = StatusPagamento.RECUSADO
         }
-        pedidoToClienteMessageSenderGateway.sendMessageToCliente(pedido)
         updatePedido(pedido)
     }
 
