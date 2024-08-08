@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody
 
 @Service
 @FeignClient(name = "clienteClient", url = "\${integration.cliente.service}")
-interface ClienteClient {
+fun interface ClienteClient {
     @GetMapping("/clientes/{cpf}")
     @ResponseBody
     fun findByCpf(@PathVariable cpf: String): ClienteDto

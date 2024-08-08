@@ -14,6 +14,7 @@ class ActiveMQConnectionFactoryWrapper {
         connectionFactory.password = password
         connectionFactory.host = host
         connectionFactory.port = port
+        connectionFactory.useSslProtocol()
         return connectionFactory.newConnection()
     }
 
