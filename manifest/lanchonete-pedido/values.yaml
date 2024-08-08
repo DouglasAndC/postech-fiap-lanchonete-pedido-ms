@@ -77,8 +77,8 @@ resources: {}
 
 autoscaling:
   enabled: true
-  minReplicas: 2
-  maxReplicas: 100
+  minReplicas: 1
+  maxReplicas: 1
   targetCPUUtilizationPercentage: 80
   targetMemoryUtilizationPercentage: 80
 
@@ -101,7 +101,7 @@ affinity: {}
 
 healthCheck:
   enabled: true
-  path: "/lanchonete-pedido/api/v1/actuator/health/readiness"
+  path: "/lanchonete-pedidos/api/v1/actuator/health"
   port: 8080
 
 env:
