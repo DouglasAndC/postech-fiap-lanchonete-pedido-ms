@@ -34,6 +34,7 @@ integration:
 app:
   mq:
     port: ${MQ_PORT:5672}
+    ssl: ${MQ_SSL:false}
     cliente:
       username: ${CLIENT_MQ_USERNAME:guest}
       password: ${CLIENT_MQ_PASSWORD:src/main/resources/credentials/secret-password-broker-mq-queue}
