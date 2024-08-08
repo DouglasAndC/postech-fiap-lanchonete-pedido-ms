@@ -130,3 +130,5 @@ env:
     value: "pedido-to-cozinha-mq"
   - name: MQ_PORT
     value: "5671"
+  - name: MQ_SSL
+    value: "true"

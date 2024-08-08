@@ -2,11 +2,12 @@ package br.com.fiap.lanchonete.pedido.infrastructure.mq
 
 import com.rabbitmq.client.Connection
 import com.rabbitmq.client.ConnectionFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 
 @Component
-class ActiveMQConnectionFactoryWrapper {
+class ActiveMQConnectionFactoryWrapper(@Value("\${app.mq.ssl}") private val ssl: Boolean) {
 
     fun createConnection(username: String, password: String, host: String,port: Int): Connection {
         val connectionFactory = ConnectionFactory()
@@ -14,7 +15,9 @@ class ActiveMQConnectionFactoryWrapper {
         connectionFactory.password = password
         connectionFactory.host = host
         connectionFactory.port = port
-        connectionFactory.useSslProtocol()
+        if(ssl){
+            connectionFactory.useSslProtocol()
+        }
         return connectionFactory.newConnection()
     }
 
