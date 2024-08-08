@@ -74,3 +74,6 @@ A independência dos serviços na coreografia significa que uma falha em um comp
 A coreografia permite que equipes menores desenvolvam, testem e implantem microsserviços de forma isolada, resultando em um processo de entrega mais rápido e eficiente.
 
 Assim, a coreografia SAGA é a escolha ideal para este projeto, proporcionando uma abordagem flexível e resiliente que se alinha com a necessidade de manter a autonomia e simplicidade dos serviços.
+
+### Desenho de Arquitetura
+![img.png](desenho-de-arquitetura.png)
