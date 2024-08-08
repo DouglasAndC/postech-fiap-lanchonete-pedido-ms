@@ -115,7 +115,7 @@ env:
   - name: CLIENT_MQ_USERNAME
     value: "guest-lanchonete"
   - name: CLIENT_MQ_PASSWORD
-    value: "/etc/credentials/secret-password-broker-mq-queue"
+    value: "/etc/credentials/secret-password-broker-mq-queue/password"
   - name: CLIENT_MQ_HOST
     value: "b-f3cb747e-0f01-440e-b725-5639b5917326.mq.us-east-1.amazonaws.com"
   - name: CLIENT_MQ_QUEUE_NAME
@@ -123,7 +123,7 @@ env:
   - name: COZINHA_MQ_USERNAME
     value: "guest-lanchonete"
   - name: COZINHA_MQ_PASSWORD
-    value: "/etc/credentials/secret-password-broker-mq-queue"
+    value: "/etc/credentials/secret-password-broker-mq-queue/password"
   - name: COZINHA_MQ_HOST
     value: "b-f3cb747e-0f01-440e-b725-5639b5917326.mq.us-east-1.amazonaws.com"
   - name: COZINHA_MQ_QUEUE_NAME
