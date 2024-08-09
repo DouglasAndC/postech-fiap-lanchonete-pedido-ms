@@ -21,6 +21,6 @@ class PedidoToCozinhaMessageSender(@Value("\${app.mq.cozinha.username}") private
 
         val secretPath = Path(password)
 
-        messageSenderService.sendMessage(username, Files.readString(secretPath), brokerURL, queueName, pedido, port)
+        messageSenderService.sendMessage(username, Files.readString(secretPath), brokerURL, queueName, pedido.copy(clienteCpf = null), port)
     }
 }
